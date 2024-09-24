@@ -2,16 +2,22 @@ from inspect import isclass
 from typing import Any, Awaitable, Callable
 from fastapi_socketio import SocketManager
 from pydantic import RootModel
+import socketio
 from core.application import Application
 from core.optionals.base.dto import BaseDTO
 from core.optionals.base.response import BaseResponse
 from plugins.liveapi.engines.base import BaseEngine
 
 
-class SocketIOEngine(BaseEngine):
+class SocketIORedisEngine(BaseEngine):
     def __init__(self, app: Application,
+                 redis_connection: str,
+                 redis_channel: str = "socketio",
+                 redis_options: dict[str, Any] | None = None,
                  location: str = "/ws",
                  cors_allowed_origins: str | list = '*') -> None:
+        self._manager = socketio.RedisManager(url=redis_connection, channel=redis_channel,
+                                              redis_options=redis_options)
         self._client = SocketManager(app, location, 
                                      cors_allowed_origins=cors_allowed_origins)
         self._scope = {} # self._scope[room_name]["excluded_events"]

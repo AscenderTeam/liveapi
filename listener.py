@@ -7,9 +7,9 @@ from core.optionals.base.dto import BaseDTO
 from core.optionals.base.response import BaseResponse
 from core.registries.service import ServiceRegistry
 from plugins.liveapi.context import SIOContext
-from fastapi.params import Depends, Header, Security
+from fastapi.params import Depends, Header
 
-from plugins.liveapi.engines.socketio import SocketIOEngine
+from plugins.liveapi.engines.base import BaseEngine
 from plugins.liveapi.error import ErrorHandler
 from plugins.liveapi.types.authorization import SIOAuthorization
 from plugins.liveapi.utils.validation import isvalid
@@ -98,7 +98,7 @@ class Listener:
         ):
         # SocketIO engine - Is the main server engine allows to run SIO
         # NOTE: It also responsible for generation `SIOContext` which is used in SocketIO Context (CTX)
-        engine = self.service_registry.get_singletone(SocketIOEngine)
+        engine = self.service_registry.get_singletone(BaseEngine)
 
         # NOTE: Error handler here handles that are same as FastAPI's error handler,
         # It handles FastAPI's HTTPException and during connection it refuses connection and during events it sends error messages

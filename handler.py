@@ -2,14 +2,13 @@ from logging import Logger, getLogger
 from typing import Any, Awaitable, Callable
 
 from fastapi.params import Depends
-from plugins.liveapi.context import SIOContext
-from plugins.liveapi.engines.socketio import SocketIOEngine
+from plugins.liveapi.engines.base import BaseEngine
 from plugins.liveapi.listener import Listener
 
 
 class SIOHandler:
     def __init__(
-            self, engine: SocketIOEngine,
+            self, engine: BaseEngine,
             listeners: list[Listener] = [],
             logger: Logger = getLogger("ascender-plugins")
         ) -> None:

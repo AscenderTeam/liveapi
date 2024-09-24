@@ -2,11 +2,11 @@ from typing import Any, Iterable
 from pydantic import RootModel
 from core.optionals.base.dto import BaseDTO
 from core.optionals.base.response import BaseResponse
-from plugins.liveapi.engines.socketio import SocketIOEngine
+from plugins.liveapi.engines.base import BaseEngine
 
 
 class SIOContext:
-    def __init__(self, engine: SocketIOEngine, namespace: str,
+    def __init__(self, engine: BaseEngine, namespace: str,
                  event_name: str, sid: str) -> None:
         self.engine = engine
         self.namespace = namespace

@@ -1,15 +1,10 @@
 from functools import wraps
-import inspect
 import os
 from typing import Any
 
 from fastapi import Depends
 
 from core.registries.service import ServiceRegistry
-from plugins.liveapi.context import SIOContext
-from plugins.liveapi.engines.socketio import SocketIOEngine
-from plugins.liveapi.handler import SIOHandler
-from plugins.liveapi.listener import Listener
 
 
 class LiveEvent:

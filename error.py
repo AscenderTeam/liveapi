@@ -1,10 +1,8 @@
 from json import JSONDecodeError
-import json
 from logging import Logger, getLogger
 from fastapi import HTTPException
 from pydantic import ValidationError
 from plugins.liveapi.context import SIOContext
-from plugins.liveapi.engines.socketio import SocketIOEngine
 
 
 class ErrorHandler:
