@@ -84,8 +84,7 @@ class SIOContext:
             exclude_events=exclude_events
         )
     
-    @property
-    def unsubscribe(self,
+    async def unsubscribe(self,
                     room_name: str,
                     sid: str | None = None,
                     namespace: str | None = None,):
@@ -94,7 +93,7 @@ class SIOContext:
         if namespace is None:
             namespace = self.namespace
 
-        return self.engine.unsubscribe(
+        return await self.engine.unsubscribe(
             room_name=room_name,
             sid=sid, namespace=namespace
         )
