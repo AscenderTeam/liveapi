@@ -1,4 +1,3 @@
-from inspect import isclass
 from typing import Any, Awaitable, Callable
 from fastapi_socketio import SocketManager
 from pydantic import RootModel
@@ -16,7 +15,7 @@ class SocketIORedisEngine(BaseEngine):
                  redis_options: dict[str, Any] | None = None,
                  location: str = "/ws",
                  cors_allowed_origins: str | list = '*') -> None:
-        self._manager = socketio.RedisManager(url=redis_connection, channel=redis_channel,
+        self._manager = socketio.AsyncRedisManager(url=redis_connection, channel=redis_channel,
                                               redis_options=redis_options)
         self._client = SocketManager(app, location, 
                                      cors_allowed_origins=cors_allowed_origins,
