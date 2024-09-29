@@ -19,7 +19,8 @@ class SocketIORedisEngine(BaseEngine):
         self._manager = socketio.RedisManager(url=redis_connection, channel=redis_channel,
                                               redis_options=redis_options)
         self._client = SocketManager(app, location, 
-                                     cors_allowed_origins=cors_allowed_origins)
+                                     cors_allowed_origins=cors_allowed_origins,
+                                     client_manager=self._manager)
         self._scope = {} # self._scope[room_name]["excluded_events"]
     
     async def send_event(self, event_name: str, 
